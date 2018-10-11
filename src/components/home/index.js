@@ -8,40 +8,43 @@ import {
   decrement,
   decrementAsync
 } from '../../reducers/counter'
-import { Card } from '../../styles'
+import {
+  suckballs,
+  punchballs,
+} from '../../reducers/balls'
+import { Card, CardFlex, Button, Title } from '../../styles'
 
 const Home = props => (
   <Fragment>
     <Card>
-      <h1>Home</h1>
+      <Title>Home</Title>
       <p>Count: {props.count}</p>
-
-      <p>
-        <button onClick={props.increment}>Increment</button>
-        <button onClick={props.incrementAsync} disabled={props.isIncrementing}>
-          Increment Async
-        </button>
-      </p>
-
-      <p>
-        <button onClick={props.decrement}>Decrement</button>
-        <button onClick={props.decrementAsync} disabled={props.isDecrementing}>
-          Decrement Async
-        </button>
-      </p>
-
-      <p>
-        <button onClick={() => props.changePage()}>
-          Go to about page via redux
-        </button>
-      </p>
-
+      <p>Balls: {props.balls}</p>
     </Card>
+    <CardFlex>
+        <Button onClick={props.increment}>Increment</Button>
+        <Button onClick={props.incrementAsync} disabled={props.isIncrementing}>
+          Increment Async
+        </Button>
+        <Button onClick={props.decrement}>Decrement</Button>
+        <Button onClick={props.decrementAsync} disabled={props.isDecrementing}>
+          Decrement Async
+        </Button>
+
+        <Button size={10} onClick={() => props.changePage()}>
+          Go to about page via redux
+        </Button>
+
+        <Button onClick={props.suckballs}>suckballs</Button>
+        <Button onClick={props.punchballs}>punchballs</Button>
+
+    </CardFlex>
   </Fragment>
 )
 
-const mapStateToProps = ({ counter }) => ({
+const mapStateToProps = ({ counter, ballers }) => ({
   count: counter.count,
+  balls: ballers.balls,
   isIncrementing: counter.isIncrementing,
   isDecrementing: counter.isDecrementing
 })
@@ -53,7 +56,9 @@ const mapDispatchToProps = dispatch =>
       incrementAsync,
       decrement,
       decrementAsync,
-      changePage: () => push('/about-us')
+      changePage: () => push('/about-us'),
+      punchballs,
+      suckballs
     },
     dispatch
   )

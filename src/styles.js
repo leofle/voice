@@ -71,7 +71,7 @@ const Button = styled.button`
     margin: 4px;
 		outline:none;
 		font-weight: bold;
-    font-size: 13px;
+    font-size: ${props=> props.size? props.size : '13px'};
 		width: 100px;
 		&:hover {
 			background: #000;

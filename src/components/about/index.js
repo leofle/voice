@@ -1,11 +1,12 @@
 import React,{Fragment} from 'react'
-import { Card } from '../../styles'
+import { Card, Title } from '../../styles'
+import store from '../../store'
 
 const About = () => (
   <Fragment>
     <Card>
-      <h1>About Balls</h1>
-      <p>Did you get here via Redux?</p>
+      <Title>About Balls</Title>
+      <p>{store.getState().ballers.balls}</p>
     </Card>
   </Fragment>
 )
