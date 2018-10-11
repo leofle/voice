@@ -7,7 +7,7 @@ import {
   incrementAsync,
   decrement,
   decrementAsync
-} from '../../modules/counter'
+} from '../../reducers/counter'
 import { Card } from '../../styles'
 
 const Home = props => (

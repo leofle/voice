@@ -1,10 +1,9 @@
-import React from 'react'
+import React,{Fragment} from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
 import store, { history } from './store'
-import App from './containers/app'
-
+import App from './components/App'
 import './index.scss'
 
 const target = document.querySelector('#root')
@@ -12,9 +11,9 @@ const target = document.querySelector('#root')
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <div>
+      <Fragment>
         <App />
-      </div>
+      </Fragment>
     </ConnectedRouter>
   </Provider>,
   target
