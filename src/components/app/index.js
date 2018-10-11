@@ -1,7 +1,8 @@
 import React from 'react'
 import { Route, NavLink } from 'react-router-dom'
-import Home from '../Home'
-import About from '../About'
+import asyncComponent from '../Async/Async'
+const AsyncHome = asyncComponent(() => import("../Home"));
+const AsyncAbout = asyncComponent(() => import("../About"));
 
 const App = () => (
   <div>
@@ -12,15 +13,15 @@ const App = () => (
             <NavLink to="/" exact={true} activeClassName="is-active">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/about-us" exact={true} activeClassName="is-active">About</NavLink>
+            <NavLink to="/about" exact={true} activeClassName="is-active">About</NavLink>
           </li>
         </ul>
       </nav>
     </header>
 
     <main>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/about-us" component={About} />
+      <Route exact path="/" component={AsyncHome} />
+      <Route exact path="/about" component={AsyncAbout} />
     </main>
   </div>
 )
