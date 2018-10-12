@@ -15,7 +15,8 @@ export default class Form extends Component {
 		return (
 			<Card>
 				<form onSubmit={this.onSubmit}>
-					<label>Add data
+					<label>
+						Add data
 						<Input type="text" onChange={this.onChange} value={this.props.label}/>
 					</label>
 					<input type="submit" color={'cyan'} value="Submit"/>
