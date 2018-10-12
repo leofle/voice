@@ -17,12 +17,12 @@ import { Card, CardFlex, Button, Title } from '../../styles'
 
 const Home = props => (
   <Fragment>
+    <Form {...props}/>
     <Card>
       <Title>Home</Title>
       <p>Count: {props.count}</p>
       <p>Balls: {props.label}</p>
     </Card>
-    <Form {...props}/>
     <CardFlex>
         <Button onClick={props.increment}>Increment</Button>
         <Button onClick={props.incrementAsync} disabled={props.isIncrementing}>
@@ -33,7 +33,7 @@ const Home = props => (
           Decrement Async
         </Button>
 
-        <Button size={10} onClick={() => props.changePage()}>
+        <Button small onClick={() => props.changePage()}>
           Go to about page via redux
         </Button>
 
