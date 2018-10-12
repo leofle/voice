@@ -2,7 +2,6 @@ import React from 'react'
 import stampToHuman from '../../utils/dateUtils'
 
 const ListItem = ({items}) => {
-	console.log(items)
 
 	return (
 		<li>

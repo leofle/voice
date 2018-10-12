@@ -12,7 +12,6 @@ export default class List extends Component {
     }
   }
   componentDidMount(){
-    console.log(store.getState().records.recordingList)
     this.setState({
       recordingList: store.getState().records.recordingList
     })

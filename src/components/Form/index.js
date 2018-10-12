@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Card, Input } from '../../styles'
-import store from '../../store';
 
 export default class Form extends Component {
 
@@ -9,7 +8,6 @@ export default class Form extends Component {
 	}
 	onSubmit = (e)=> {
 		e.preventDefault();
-		console.log(store.getState().labels.label)
 	}
 	render() {
 		return (

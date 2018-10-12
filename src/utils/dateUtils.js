@@ -1,9 +1,9 @@
 const stampToHuman = (t,t2)=> {
-	let diff = t - t2;
-	let secs = new Date(diff).getSeconds();
-	let min = new Date(diff).getMinutes();
-	let hor = new Date(diff).getUTCHours();
-	console.log(hor)
+	let diff = t - t2,
+	secs = new Date(diff).getSeconds(),
+	min = new Date(diff).getMinutes(),
+	hor = new Date(diff).getUTCHours();
+
 	if(secs < 9){
 		secs = `0${secs}`
 	}
