@@ -9,9 +9,10 @@ import {
   decrementAsync
 } from '../../reducers/counter'
 import {
-  suckballs,
-  punchballs,
-} from '../../reducers/balls'
+  addlabel,
+  removelabel,
+} from '../../reducers/input'
+import Form from '../Form'
 import { Card, CardFlex, Button, Title } from '../../styles'
 
 const Home = props => (
@@ -19,8 +20,9 @@ const Home = props => (
     <Card>
       <Title>Home</Title>
       <p>Count: {props.count}</p>
-      <p>Balls: {props.balls}</p>
+      <p>Balls: {props.label}</p>
     </Card>
+    <Form {...props}/>
     <CardFlex>
         <Button onClick={props.increment}>Increment</Button>
         <Button onClick={props.incrementAsync} disabled={props.isIncrementing}>
@@ -35,16 +37,16 @@ const Home = props => (
           Go to about page via redux
         </Button>
 
-        <Button onClick={props.suckballs}>suckballs</Button>
-        <Button onClick={props.punchballs}>punchballs</Button>
+        <Button onClick={()=> props.addlabel('pepe')}>addlabel</Button>
+        <Button onClick={props.removelabel}>remove label</Button>
 
     </CardFlex>
   </Fragment>
 )
 
-const mapStateToProps = ({ counter, ballers }) => ({
+const mapStateToProps = ({ counter, labels }) => ({
   count: counter.count,
-  balls: ballers.balls,
+  label: labels.label,
   isIncrementing: counter.isIncrementing,
   isDecrementing: counter.isDecrementing
 })
@@ -56,9 +58,9 @@ const mapDispatchToProps = dispatch =>
       incrementAsync,
       decrement,
       decrementAsync,
-      changePage: () => push('/about-us'),
-      punchballs,
-      suckballs
+      changePage: () => push('/about'),
+      removelabel,
+      addlabel
     },
     dispatch
   )
