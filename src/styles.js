@@ -97,4 +97,16 @@ const Flex = styled.div`
 		justify-content: center;
 `;
 
-export {Body, Button, Container, DonutContainer ,Title, Card, CardFlex, Flex, Input, InputDonut};
+const ListClean = styled.ul`
+		list-style-type: none;
+    display: flex;
+    flex-direction: column;
+		li {
+			display:flex;
+			justify-content:flex-start;
+			span {
+				margin: 0 10px;
+			}
+		}
+`;
+export {Body, Button, Container, DonutContainer ,Title, Card, CardFlex, Flex, Input, InputDonut, ListClean};

@@ -14,7 +14,8 @@ import {
 } from '../../reducers/input'
 import {
   startrecord,
-  stoprecord
+  stoprecord,
+  saverecord
 } from '../../reducers/record'
 import Form from '../Form'
 import {Voice} from '../Voice'
@@ -61,7 +62,8 @@ const mapDispatchToProps = dispatch =>
       removelabel,
       addlabel,
       startrecord,
-      stoprecord
+      stoprecord,
+      saverecord
     },
     dispatch
   )

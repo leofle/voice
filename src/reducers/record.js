@@ -1,11 +1,14 @@
 export const STARTRECORD = 'record/STARTRECORD'
 export const STOPRECORD = 'record/STOPRECORD'
+export const SAVERECORD = 'record/SAVERECORD'
 
 const initialState = {
-  recordstatus: false
+  recordstatus: false,
+  recordingList: []
 }
 
 export default (state = initialState, action) => {
+  console.log(action)
   switch (action.type) {
 
     case STARTRECORD:
@@ -20,6 +23,11 @@ export default (state = initialState, action) => {
         recordstatus: false
       }
 
+    case SAVERECORD:
+      return {
+        ...state,
+        recordingList: [...state.recordingList, action.recordItem]
+      }
     default:
       return state
   }
@@ -40,6 +48,16 @@ export const stoprecord = () => {
 
     dispatch({
       type: STOPRECORD
+    })
+  }
+}
+
+export const saverecord = (recordItem) => {
+  return dispatch => {
+
+    dispatch({
+      type: SAVERECORD,
+      recordItem
     })
   }
 }

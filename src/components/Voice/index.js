@@ -15,6 +15,7 @@ export class Voice extends React.Component {
 
   onStop = (recordedBlob)=> {
 		console.log('recordedBlob is: ', recordedBlob);
+		this.props.saverecord(recordedBlob)
 		this.setState({blob: recordedBlob})
   }
 
