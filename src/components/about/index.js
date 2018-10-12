@@ -5,7 +5,7 @@ import store from '../../store'
 const About = () => (
   <Fragment>
     <Card>
-      <Title>About Balls</Title>
+      <Title>About {store.getState().labels.label}</Title>
       <p>{store.getState().labels.label}</p>
     </Card>
   </Fragment>
