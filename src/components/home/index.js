@@ -12,41 +12,40 @@ import {
   addlabel,
   removelabel,
 } from '../../reducers/input'
+import {
+  startrecord,
+  stoprecord
+} from '../../reducers/record'
 import Form from '../Form'
-import { Card, CardFlex, Button, Title } from '../../styles'
+import {Voice} from '../Voice'
+import { Card, CardFlex, Button } from '../../styles'
 
-const Home = props => (
-  <Fragment>
-    <Form {...props}/>
-    <Card>
-      <Title>Home</Title>
-      <p>Count: {props.count}</p>
-      <p>Balls: {props.label}</p>
-    </Card>
-    <CardFlex>
-        <Button onClick={props.increment}>Increment</Button>
-        <Button onClick={props.incrementAsync} disabled={props.isIncrementing}>
-          Increment Async
-        </Button>
-        <Button onClick={props.decrement}>Decrement</Button>
-        <Button onClick={props.decrementAsync} disabled={props.isDecrementing}>
-          Decrement Async
-        </Button>
+const Home = (props) => {
+  const onRecordingStart = ()=> {
+    props.startrecord();
+    props.increment();
+  }
+  return (
+    <Fragment>
+      <Voice {...props}/>
+      <CardFlex>
+          <Button onClick={onRecordingStart}>record</Button>
+          <Button bcolor="#be47ff" onClick={props.stoprecord}>stop record</Button>
+      </CardFlex>
+      <Form {...props}/>
+      <Card>
+        <p>Recorded times: {props.count}</p>
+        <p>Record name: {props.label}</p>
+        <p>Record status: {props.record? 'recording':'stopped'}</p>
+      </Card>
+    </Fragment>
+  )
+}
 
-        <Button small onClick={() => props.changePage()}>
-          Go to about page via redux
-        </Button>
-
-        <Button onClick={()=> props.addlabel('pepe')}>addlabel</Button>
-        <Button onClick={props.removelabel}>remove label</Button>
-
-    </CardFlex>
-  </Fragment>
-)
-
-const mapStateToProps = ({ counter, labels }) => ({
+const mapStateToProps = ({ counter, labels, records }) => ({
   count: counter.count,
   label: labels.label,
+  record: records.recordstatus,
   isIncrementing: counter.isIncrementing,
   isDecrementing: counter.isDecrementing
 })
@@ -58,9 +57,11 @@ const mapDispatchToProps = dispatch =>
       incrementAsync,
       decrement,
       decrementAsync,
-      changePage: () => push('/about'),
+      changePage: () => push('/list'),
       removelabel,
-      addlabel
+      addlabel,
+      startrecord,
+      stoprecord
     },
     dispatch
   )

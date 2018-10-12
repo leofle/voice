@@ -22,20 +22,21 @@ const Card = styled.div`
 	margin: 24px;
 	padding: 16px;
 	color: #757575;
-	border-radius: 5px;
+	border-radius: ${props=> props.bradius? '5px':'0'};
 	background-color: #fff;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 `;
 
 const CardFlex = styled.div`
 	display: flex;
+	flex-direction: ${props=> props.column? 'column':'row'}
 	justify-content: center;
 	align-items: center;
 	word-break: break-word;
 	margin: 24px;
 	padding: 16px;
 	color: #757575;
-	border-radius: 5px;
+	border-radius: ${props=> props.bradius? '5px':'0'};
 	background-color: #fff;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 	img {
@@ -64,7 +65,7 @@ const DonutContainer = styled.div`
 `;
 
 const Button = styled.button`
-		background: ${props=> props.color? props.color : 'tomato'};
+		background: ${props=> props.bcolor? props.bcolor : 'tomato'};
 		height: 40px;
     border: none;
     border-radius: 6px;
