@@ -4,11 +4,11 @@ import store from '../../store';
 
 export default class Form extends Component {
 
-	onChange = (event)=> {
-		this.props.addlabel(event.target.value);
+	onChange = (e)=> {
+		this.props.addlabel(e.target.value);
 	}
-	onSubmit = (event)=> {
-		event.preventDefault();
+	onSubmit = (e)=> {
+		e.preventDefault();
 		console.log(store.getState().labels.label)
 	}
 	render() {
