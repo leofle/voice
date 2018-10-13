@@ -21,7 +21,7 @@ export class Voice extends React.Component {
 
   render() {
     return (
-      <CardFlex column>
+      <CardFlex column noshadow>
         <ReactMic
           record={store.getState().records.recordstatus}
           className="sound-wave"

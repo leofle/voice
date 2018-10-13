@@ -38,7 +38,7 @@ const CardFlex = styled.div`
 	color: #757575;
 	border-radius: ${props=> props.bradius? '5px':'0'};
 	background-color: #fff;
-	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+	box-shadow: ${props=> props.noshadow? 'none' : '0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)'};
 	img {
 		margin-left: 5px;
 	}
@@ -74,6 +74,14 @@ const Button = styled.button`
 		font-weight: bold;
     font-size: ${props=> props.small? '0.6em' : '0.8em'};
 		width: 100px;
+		display: flex;
+    justify-content: center;
+    align-items: center;
+		&:disabled,&:hover:disabled {
+			cursor: default;
+			background: #ccc;
+			color: #000;
+		}
 		&:hover {
 			background: #000;
 			color: #fff;
