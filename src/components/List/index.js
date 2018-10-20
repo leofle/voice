@@ -2,20 +2,8 @@ import React,{Component, Fragment} from 'react'
 import store from '../../store'
 import ListItem from '../ListItem'
 import { compose, graphql } from 'react-apollo'
-import { gql } from 'apollo-boost'
 import { Card, Title, ListClean } from '../../styles'
-
-const getRecordsQuery = gql`
-  {
-    records {
-      id
-      name
-      startTime
-      stopTime
-      blobUrl
-    }
-  }
-`;
+import {getRecordsQuery, addRecordMutation, delRecordMutation} from '../../queries'
 
 class List extends Component {
   constructor(props){
@@ -25,27 +13,36 @@ class List extends Component {
     }
   }
   componentDidMount(){
-    if(!this.props.data.loading){
+    if(!this.props.getRecordsQuery.loading){
       this.setState({
-        recordingList: this.props.data.records
-        // recordingList: store.getState().records.recordingList
+        recordingList: this.props.getRecordsQuery.records
       })
     }
+    console.log(this.state.recordingList)
+  }
+  delRecord =(id)=>{
+    this.props.delRecordMutation({
+      variables: {
+        id:id
+      }
+    })
+    this.setState({});
   }
   displayRecords(){
-    let data = this.props.data;
+    let data = this.props.getRecordsQuery;
     if(data.laoding){
       return(<div>loading...</div>);
     }
     else {
       return data.records && data.records.map((record, index)=> {
-        return <ListItem key={index} items={record}/>;
+        return <ListItem key={index} items={record} delRecord={this.delRecord}/>;
       })
     }
   }
+
   render() {
     const { recordingList } = this.state;
-    console.log(this.displayRecords())
+
     return (
       <Fragment>
         <Card>
@@ -59,4 +56,8 @@ class List extends Component {
     )
   }
 }
-export default graphql(getRecordsQuery)(List)
+export default compose(
+  graphql(getRecordsQuery, {name: 'getRecordsQuery'}),
+  graphql(addRecordMutation, {name: 'addRecordMutation'}),
+  graphql(delRecordMutation, {name: 'delRecordMutation'}),
+)(List)

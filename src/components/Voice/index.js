@@ -1,11 +1,13 @@
 import React from 'react'
 import { ReactMic } from 'react-mic';
-import store from '../../store';
 import { CardFlex } from '../../styles'
+import { compose, graphql } from 'react-apollo'
+import {getRecordsQuery, addRecordMutation} from '../../queries'
 
-export class Voice extends React.Component {
+class Voice extends React.Component {
 
 	state = {
+    recordstatus:this.props.status || false,
 		blob:''
 	}
 
@@ -14,16 +16,24 @@ export class Voice extends React.Component {
   }
 
   onStop = (recordedBlob)=> {
-		console.log('recordedBlob is: ', recordedBlob);
-		this.props.saverecord(recordedBlob)
-		this.setState({blob: recordedBlob})
+    console.log('recordedBlob is: ', recordedBlob);
+    this.setState({blob: recordedBlob, recordstatus: false})
+		this.props.addRecordMutation({
+      variables: {
+        name:this.props.label || '',
+        startTime: String(recordedBlob.startTime),
+        stopTime: String(recordedBlob.stopTime),
+        blob: recordedBlob.blobURL
+      }
+    })
   }
 
   render() {
+    console.log(this.state.recordstatus)
     return (
       <CardFlex column noshadow>
         <ReactMic
-          record={store.getState().records.recordstatus}
+          record={this.props.status}
           className="sound-wave"
           onStop={this.onStop}
           onData={this.onData}
@@ -34,3 +44,8 @@ export class Voice extends React.Component {
     );
   }
 }
+
+export default compose(
+  graphql(getRecordsQuery, {name: 'getRecordsQuery'}),
+  graphql(addRecordMutation, {name: 'addRecordMutation'})
+)(Voice)

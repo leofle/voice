@@ -112,6 +112,8 @@ const ListClean = styled.ul`
 		li {
 			display:flex;
 			justify-content:flex-start;
+			padding: 4px 0;
+    	align-items: center;
 			span {
 				margin: 0 10px;
 			}

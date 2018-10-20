@@ -4,10 +4,11 @@ import { Card, Input } from '../../styles'
 export default class Form extends Component {
 
 	onChange = (e)=> {
-		this.props.addlabel(e.target.value);
+		this.props.addLabel(e.target.value);
 	}
 	onSubmit = (e)=> {
 		e.preventDefault();
+		this.props.hadleSubmit(e);
 	}
 	render() {
 		return (
