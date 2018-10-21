@@ -119,4 +119,10 @@ const ListClean = styled.ul`
 			}
 		}
 `;
-export {Body, Button, Container, DonutContainer ,Title, Card, CardFlex, Flex, Input, InputDonut, ListClean};
+
+const Speech = styled.div`
+		max-height: 210px;
+		overflow:auto;
+`;
+
+export {Body, Button, Container, DonutContainer ,Title, Card, CardFlex, Flex, Input, InputDonut, ListClean, Speech};

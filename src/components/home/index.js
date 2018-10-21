@@ -1,24 +1,53 @@
 import React, {Component, Fragment} from 'react'
 import Form from '../Form'
 import Voice from '../Voice'
-import { compose, graphql, renderToStringWithData } from 'react-apollo'
+import { compose, graphql } from 'react-apollo'
 import {getRecordsQuery, addRecordMutation} from '../../queries'
-import { Card, CardFlex, Button } from '../../styles'
+import { Card, CardFlex, Button, Speech } from '../../styles'
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+
+recognition.interimResults = true;
+recognition.lang = 'en-US';
 
 class Home extends Component {
   state = {
     recordstatus: false,
     count:0,
-    label: ''
-
+    label: '',
+    transArray:[]
   }
   onRecordingStart = ()=>{
+    let {transArray} = this.state;
+    recognition.start();
+    recognition.addEventListener("result", (e)=> {
+      const tran = Array.from(e.results)
+      .map(result=> result[0])
+      .map(result=> result.transcript)
+      .join('');
+
+      if(e.results[0].isFinal){
+        console.log('isFinal', this.state.transArray)
+        this.setState({
+          transArray: this.state.transArray.concat([tran])
+        }
+        )
+      }
+      // else {
+      //   this.setState({
+      //     transArray: this.state.transArray.concat([tran])
+      //   })
+      // }
+    })
+    recognition.addEventListener("end", recognition.start);
     this.setState({
       recordstatus: true,
       count: this.state.count +1
     })
   }
   onRecordingStops = ()=>{
+    recognition.stop();
     this.setState({
       recordstatus: false
     })
@@ -31,6 +60,7 @@ class Home extends Component {
   handleForm = (e)=> {
     console.log(e)
   }
+
   render(){
     let formProps = {
       addLabel: this.addLabel,
@@ -56,6 +86,13 @@ class Home extends Component {
           stop record
         </Button>
       </CardFlex>
+      <Card>
+      <Speech>
+        {this.state.transArray.map((trans, index)=>{
+          return <p key={index}>{trans}</p>
+        })}
+      </Speech>
+      </Card>
       <Form {...formProps}/>
       <Card>
         <p>Recorded times: {this.state.count}</p>

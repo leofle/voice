@@ -18,7 +18,6 @@ class List extends Component {
         recordingList: this.props.getRecordsQuery.records
       })
     }
-    console.log(this.state.recordingList)
   }
   delRecord =(id)=>{
     this.props.delRecordMutation({
@@ -41,7 +40,6 @@ class List extends Component {
   }
 
   render() {
-    const { recordingList } = this.state;
 
     return (
       <Fragment>

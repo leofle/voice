@@ -12,11 +12,11 @@ class Voice extends React.Component {
 	}
 
   onData = (recordedBlob)=> {
-		console.log('chunk of real-time data is: ', recordedBlob);
+		//console.log('chunk of real-time data is: ', recordedBlob);
   }
 
   onStop = (recordedBlob)=> {
-    console.log('recordedBlob is: ', recordedBlob);
+    //console.log('recordedBlob is: ', recordedBlob);
     this.setState({blob: recordedBlob, recordstatus: false})
 		this.props.addRecordMutation({
       variables: {
@@ -29,7 +29,6 @@ class Voice extends React.Component {
   }
 
   render() {
-    console.log(this.state.recordstatus)
     return (
       <CardFlex column noshadow>
         <ReactMic
