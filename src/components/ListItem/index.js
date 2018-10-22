@@ -7,10 +7,10 @@ const ListItem = ({items, delRecord}) => {
 	}
 	return (
 		<li>
-			<span>Recording: {items.name}</span>
-			<span>Start Time: {items.startTime}</span>
-			<span>Stop Time: {items.stopTime}</span>
-			<span>Total Time: {stampToHuman(items.stopTime, items.startTime)}</span>
+			<span>{items.name || '--'}</span>
+			<span>{items.startTime}</span>
+			<span>{items.stopTime}</span>
+			<span>{stampToHuman(items.stopTime, items.startTime)}</span>
 			<audio id="audio"  src={items.blobUrl}></audio>
 			<Button onClick={handleClick}>Del</Button>
 		</li>

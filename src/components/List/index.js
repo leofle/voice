@@ -45,7 +45,14 @@ class List extends Component {
       <Fragment>
         <Card>
           <Title>Records list</Title>
-          <ListClean>
+          <ListClean flgrow>
+            <li>
+              <span>Record</span>
+              <span>Start Time</span>
+              <span>Stop Time</span>
+              <span>Total</span>
+              <span>Actions</span>
+            </li>
             {this.displayRecords()}
           </ListClean>
           <p>{store.getState().labels.label}</p>

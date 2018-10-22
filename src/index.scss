@@ -32,6 +32,9 @@ $hederHeight: 65px;
 nav {
 	background-color: #fff;
 	box-shadow: 4px 0px 15px #ccc;
+	position: fixed;
+	width: 100%;
+	top: 0;
 	ul {
 		margin: 0;
 		padding: 0;
@@ -55,4 +58,7 @@ nav {
 			}
 		}
 	}
+}
+main {
+	padding-top: 40px;
 }

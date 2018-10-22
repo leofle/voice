@@ -108,14 +108,20 @@ const Flex = styled.div`
 const ListClean = styled.ul`
 		list-style-type: none;
     display: flex;
-    flex-direction: column;
+		flex-direction: column;
+		padding: 0;
 		li {
 			display:flex;
 			justify-content: space-evenly;
 			padding: 4px 0;
-    	align-items: center;
+			align-items: center;
+			&:first-child {
+				font-weight: 600;
+			}
 			span {
 				margin: 0 10px;
+				flex-grow: ${props=>props.flgrow? 1 : 0}
+				max-width: 93px;
 			}
 		}
 `;
