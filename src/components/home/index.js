@@ -4,6 +4,7 @@ import Voice from '../Voice'
 import { compose, graphql } from 'react-apollo'
 import {getRecordsQuery, addRecordMutation} from '../../queries'
 import { Card, CardFlex, Button, Speech } from '../../styles'
+import debounce from '../../utils/debounce'
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
@@ -16,29 +17,40 @@ class Home extends Component {
     recordstatus: false,
     count:0,
     label: '',
-    transArray:[]
+    transArray:[],
+    confidence:[]
   }
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+  
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   onRecordingStart = ()=>{
     let {transArray} = this.state;
+    const activatePop = debounce((e)=>{
+      console.log('push harder!!');
+    },500);
     recognition.start();
     recognition.addEventListener("result", (e)=> {
       const tran = Array.from(e.results)
       .map(result=> result[0])
       .map(result=> result.transcript)
       .join('');
-      console.log(e.results[0][0], e.results[0][0].confidence)
+      console.log('confidence:',e.results[0][0].confidence)
       if(e.results[0].isFinal){
-        console.log('isFinal', this.state.transArray)
         this.setState({
-          transArray: this.state.transArray.concat([tran])
+          transArray: this.state.transArray.concat([tran]),
+          confidence: this.state.confidence.concat([e.results[0][0].confidence])
         }
         )
       }
-      // else {
-      //   this.setState({
-      //     transArray: this.state.transArray.concat([tran])
-      //   })
-      // }
+      if(tran.includes("I'm thinking about it")){
+        activatePop();
+      }
+
     })
     recognition.addEventListener("end", recognition.start);
     this.setState({
@@ -47,7 +59,10 @@ class Home extends Component {
     })
   }
   onRecordingStops = ()=>{
-    recognition.stop();
+    recognition.onspeechend = function() {
+      recognition.stop();
+      console.log('Speech recognition has stopped.');
+    }
     this.setState({
       recordstatus: false
     })
@@ -60,7 +75,9 @@ class Home extends Component {
   handleForm = (e)=> {
     console.log(e)
   }
-
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
   render(){
     let formProps = {
       addLabel: this.addLabel,
@@ -91,6 +108,9 @@ class Home extends Component {
         {this.state.transArray.map((trans, index)=>{
           return <p key={index}>{trans}</p>
         })}
+        <div style={{ float:"left", clear: "both" }}
+             ref={(el) => { this.messagesEnd = el; }}>
+        </div>
       </Speech>
       </Card>
       <Form {...formProps}/>
