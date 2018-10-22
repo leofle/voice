@@ -11,7 +11,7 @@ const ListItem = ({items, delRecord}) => {
 			<span>Start Time: {items.startTime}</span>
 			<span>Stop Time: {items.stopTime}</span>
 			<span>Total Time: {stampToHuman(items.stopTime, items.startTime)}</span>
-			<audio id="audio" controls src={items.blobUrl}></audio>
+			<audio id="audio"  src={items.blobUrl}></audio>
 			<Button onClick={handleClick}>Del</Button>
 		</li>
 	)

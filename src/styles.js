@@ -111,7 +111,7 @@ const ListClean = styled.ul`
     flex-direction: column;
 		li {
 			display:flex;
-			justify-content:flex-start;
+			justify-content: space-evenly;
 			padding: 4px 0;
     	align-items: center;
 			span {

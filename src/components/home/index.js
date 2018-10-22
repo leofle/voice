@@ -26,7 +26,7 @@ class Home extends Component {
       .map(result=> result[0])
       .map(result=> result.transcript)
       .join('');
-
+      console.log(e.results[0][0], e.results[0][0].confidence)
       if(e.results[0].isFinal){
         console.log('isFinal', this.state.transArray)
         this.setState({
