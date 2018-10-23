@@ -1,8 +1,6 @@
 import React,{Fragment} from 'react'
 import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import { ConnectedRouter } from 'connected-react-router'
-import store, { history } from './store'
+import { BrowserRouter } from 'react-router-dom'
 import App from './components/App'
 import './index.scss'
 import ApolloClient from 'apollo-boost'
@@ -15,13 +13,11 @@ const target = document.querySelector('#root')
 
 render(
   <ApolloProvider client={client}>
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
+    <BrowserRouter>
       <Fragment>
         <App />
       </Fragment>
-    </ConnectedRouter>
-  </Provider>
+    </BrowserRouter>
   </ApolloProvider>,
   target
 )

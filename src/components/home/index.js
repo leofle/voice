@@ -29,7 +29,6 @@ class Home extends Component {
   }
 
   onRecordingStart = ()=>{
-    let {transArray} = this.state;
     const activatePop = debounce((e)=>{
       console.log('push harder!!');
     },500);

@@ -1,5 +1,4 @@
 import React,{Component, Fragment} from 'react'
-import store from '../../store'
 import ListItem from '../ListItem'
 import { compose, graphql } from 'react-apollo'
 import { Card, Title, ListClean } from '../../styles'
@@ -55,7 +54,6 @@ class List extends Component {
             </li>
             {this.displayRecords()}
           </ListClean>
-          <p>{store.getState().labels.label}</p>
         </Card>
       </Fragment>
     )
