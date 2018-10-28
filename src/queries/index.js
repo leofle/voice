@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost'
 
-const getRecordsQuery = gql`
+const GET_RECORDS_QUERY = gql`
   {
     records {
       id
@@ -12,7 +12,7 @@ const getRecordsQuery = gql`
   }
 `;
 
-const addRecordMutation = gql`
+const ADD_RECORD_MUTATION = gql`
 mutation($name:String,$startTime: String,$stopTime:String,$blob:String) {
   addRecord(name: $name, startTime: $startTime,stopTime:$stopTime, blobUrl: $blob){
     name
@@ -24,7 +24,7 @@ mutation($name:String,$startTime: String,$stopTime:String,$blob:String) {
 }
 `;
 
-const delRecordMutation = gql`
+const DEL_RECORD_MUTATION = gql`
 mutation($id:String) {
   delRecord(id:$id){
     name
@@ -33,4 +33,24 @@ mutation($id:String) {
 }
 `;
 
-export {getRecordsQuery, addRecordMutation, delRecordMutation};
+const GET_RECORD_STATUS = gql`
+  query {
+    recordStatus @client {
+      isRecording
+    }
+  }
+`;
+
+const CHANGE_RECORD_STATUS_MUTATION = gql`
+  mutation($isRecording: Boolean) {
+    updateRecordStatus(isRecording: $isRecording) @client
+  }
+`;
+
+export {
+  GET_RECORDS_QUERY,
+  ADD_RECORD_MUTATION, 
+  DEL_RECORD_MUTATION,
+  GET_RECORD_STATUS,
+  CHANGE_RECORD_STATUS_MUTATION
+};

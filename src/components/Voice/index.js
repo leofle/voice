@@ -2,7 +2,7 @@ import React from 'react'
 import { ReactMic } from 'react-mic';
 import { CardFlex } from '../../styles'
 import { compose, graphql } from 'react-apollo'
-import {getRecordsQuery, addRecordMutation} from '../../queries'
+import {GET_RECORDS_QUERY, ADD_RECORD_MUTATION} from '../../queries'
 
 class Voice extends React.Component {
 
@@ -18,7 +18,7 @@ class Voice extends React.Component {
   onStop = (recordedBlob)=> {
     //console.log('recordedBlob is: ', recordedBlob);
     this.setState({blob: recordedBlob, recordstatus: false})
-		this.props.addRecordMutation({
+		this.props.ADD_RECORD_MUTATION({
       variables: {
         name:this.props.label || '',
         startTime: String(recordedBlob.startTime),
@@ -45,6 +45,6 @@ class Voice extends React.Component {
 }
 
 export default compose(
-  graphql(getRecordsQuery, {name: 'getRecordsQuery'}),
-  graphql(addRecordMutation, {name: 'addRecordMutation'})
+  graphql(GET_RECORDS_QUERY, {name: 'GET_RECORDS_QUERY'}),
+  graphql(ADD_RECORD_MUTATION, {name: 'ADD_RECORD_MUTATION'})
 )(Voice)

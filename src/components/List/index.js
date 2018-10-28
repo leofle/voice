@@ -1,8 +1,8 @@
 import React,{Component, Fragment} from 'react'
 import ListItem from '../ListItem'
-import { compose, graphql } from 'react-apollo'
+import { compose, graphql, Query } from 'react-apollo'
 import { Card, Title, ListClean } from '../../styles'
-import {getRecordsQuery, addRecordMutation, delRecordMutation} from '../../queries'
+import {GET_RECORDS_QUERY, ADD_RECORD_MUTATION, DEL_RECORD_MUTATION} from '../../queries'
 
 class List extends Component {
   constructor(props){
@@ -12,30 +12,19 @@ class List extends Component {
     }
   }
   componentDidMount(){
-    if(!this.props.getRecordsQuery.loading){
+    if(!this.props.GET_RECORDS_QUERY.loading){
       this.setState({
-        recordingList: this.props.getRecordsQuery.records
+        recordingList: this.props.GET_RECORDS_QUERY.records
       })
     }
   }
   delRecord =(id)=>{
-    this.props.delRecordMutation({
+    this.props.DEL_RECORD_MUTATION({
       variables: {
         id:id
       }
     })
     this.setState({});
-  }
-  displayRecords(){
-    let data = this.props.getRecordsQuery;
-    if(data.laoding){
-      return(<div>loading...</div>);
-    }
-    else {
-      return data.records && data.records.map((record, index)=> {
-        return <ListItem key={index} items={record} delRecord={this.delRecord}/>;
-      })
-    }
   }
 
   render() {
@@ -52,7 +41,13 @@ class List extends Component {
               <span>Total</span>
               <span>Actions</span>
             </li>
-            {this.displayRecords()}
+            <Query query={GET_RECORDS_QUERY}>
+              {({loading, data})=>{
+                if(loading) return 'loading...'
+                const { records } = data;
+                  return records.map((record, index)=> <ListItem key={index} items={record} delRecord={this.delRecord}/>)
+              }}
+            </Query>
           </ListClean>
         </Card>
       </Fragment>
@@ -60,7 +55,7 @@ class List extends Component {
   }
 }
 export default compose(
-  graphql(getRecordsQuery, {name: 'getRecordsQuery'}),
-  graphql(addRecordMutation, {name: 'addRecordMutation'}),
-  graphql(delRecordMutation, {name: 'delRecordMutation'}),
+  graphql(GET_RECORDS_QUERY, {name: 'GET_RECORDS_QUERY'}),
+  graphql(ADD_RECORD_MUTATION, {name: 'ADD_RECORD_MUTATION'}),
+  graphql(DEL_RECORD_MUTATION, {name: 'DEL_RECORD_MUTATION'}),
 )(List)
