@@ -82,7 +82,6 @@ class Home extends Component {
         isRecording: !isRecording
       }
     })
-    this.setState({});
   }
   addLabel = (label)=> {
     this.setState({
