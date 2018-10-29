@@ -8,18 +8,20 @@ const GET_RECORDS_QUERY = gql`
       startTime
       stopTime
       blobUrl
+      speech
     }
   }
 `;
 
 const ADD_RECORD_MUTATION = gql`
-mutation($name:String,$startTime: String,$stopTime:String,$blob:String) {
-  addRecord(name: $name, startTime: $startTime,stopTime:$stopTime, blobUrl: $blob){
+mutation($name:String,$startTime: String,$stopTime:String,$blob:String,$speech:String) {
+  addRecord(name: $name, startTime: $startTime,stopTime:$stopTime, blobUrl: $blob, speech: $speech){
     name
     id
     startTime
     stopTime
     blobUrl
+    speech
   }
 }
 `;

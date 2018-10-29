@@ -105,7 +105,7 @@ class Home extends Component {
         {({loading, data})=>{
             if(loading) return 'loading...'
             const { recordStatus: {isRecording} } = data;
-            return  <Voice status={isRecording} label={this.state.label}/>
+            return  <Voice status={isRecording} label={this.state.label} textSpeech={this.state.transArray}/>
         }}
       </Query>
       <CardFlex>

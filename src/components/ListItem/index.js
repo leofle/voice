@@ -8,11 +8,10 @@ const ListItem = ({items, delRecord, refetch}) => {
 	}
 	return (
 		<li>
-			<span>{items.name || '--'}</span>
+			<span>{items.blobUrl || '--'}</span>
 			<span>{items.startTime}</span>
 			<span>{items.stopTime}</span>
 			<span>{stampToHuman(items.stopTime, items.startTime)}</span>
-			<audio id="audio"  src={items.blobUrl}></audio>
 			<Button onClick={handleClick}>Del</Button>
 		</li>
 	)

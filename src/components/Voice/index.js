@@ -8,7 +8,8 @@ class Voice extends React.Component {
 
 	state = {
     recordstatus:this.props.status || false,
-		blob:''
+    blob: '',
+    speech: ''
 	}
 
   onData = (recordedBlob)=> {
@@ -23,7 +24,8 @@ class Voice extends React.Component {
         name:this.props.label || '',
         startTime: String(recordedBlob.startTime),
         stopTime: String(recordedBlob.stopTime),
-        blob: recordedBlob.blobURL
+        blob: recordedBlob.blobURL,
+        speech: this.props.textSpeech.join(' ')
       }
     })
   }
