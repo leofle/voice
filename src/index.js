@@ -5,32 +5,13 @@ import App from './components/App'
 import './index.scss'
 import ApolloClient from 'apollo-boost'
 import {ApolloProvider} from 'react-apollo'
+import {defaults, resolvers} from './resolvers'
 
 const client = new ApolloClient({
   uri:'http://localhost:4000/graphql',
   clientState: {
-    defaults: {
-      recordStatus: {
-        __typename: "recordStatus",
-        isRecording: false
-      }
-    },
-    resolvers: {
-      Query: {},
-      Mutation: {
-        updateRecordStatus: (_, { isRecording }, { cache }) => {
-          cache.writeData({
-            data: {
-              recordStatus: {
-                __typename: "recordStatus",
-                isRecording
-              }
-            }
-          });
-          return null;
-        }
-      }
-    }
+    defaults,
+    resolvers
   }
 })
 const target = document.querySelector('#root')
