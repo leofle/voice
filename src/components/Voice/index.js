@@ -17,7 +17,7 @@ class Voice extends React.Component {
   }
 
   onStop = (recordedBlob)=> {
-    //console.log('recordedBlob is: ', recordedBlob);
+    //console.log(this.props.textSpeech.join(' '));
     this.setState({blob: recordedBlob, recordstatus: false})
 		this.props.ADD_RECORD_MUTATION({
       variables: {

@@ -123,6 +123,11 @@ const ListClean = styled.ul`
 				flex-grow: ${props=>props.flgrow? 1 : 0}
 				max-width: 93px;
 			}
+			p {
+				width: 100%;
+    		margin: 0;
+    		padding: 0 55px;
+			}
 		}
 `;
 
