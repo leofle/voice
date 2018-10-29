@@ -15,6 +15,7 @@ class List extends Component {
         id:id
       }
     })
+    this.props.GET_RECORDS_QUERY.refetch();
   }
 
   render() {

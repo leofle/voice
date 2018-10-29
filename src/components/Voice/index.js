@@ -7,7 +7,6 @@ import {GET_RECORDS_QUERY, ADD_RECORD_MUTATION} from '../../queries'
 class Voice extends React.Component {
 
 	state = {
-    recordstatus:this.props.status || false,
     blob: '',
     speech: ''
 	}
@@ -18,7 +17,7 @@ class Voice extends React.Component {
 
   onStop = (recordedBlob)=> {
     //console.log(this.props.textSpeech.join(' '));
-    this.setState({blob: recordedBlob, recordstatus: false})
+    this.setState({blob: recordedBlob})
 		this.props.ADD_RECORD_MUTATION({
       variables: {
         name:this.props.label || '',

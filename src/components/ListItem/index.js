@@ -4,13 +4,11 @@ import { Button } from '../../styles'
 const ListItem = ({items, delRecord, refetch}) => {
 	const handleClick = ()=> {
 		delRecord(items.id);
-		refetch();
 	}
 	return (
 		<Fragment>
 			<li>
-				{console.log(items.speech)}
-				<span>{items.label || '--'}</span>
+				<span>{items.name || '--'}</span>
 				<span>{items.startTime}</span>
 				<span>{items.stopTime}</span>
 				<span>{stampToHuman(items.stopTime, items.startTime)}</span>
