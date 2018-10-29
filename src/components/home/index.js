@@ -10,6 +10,7 @@ import {
 } from '../../queries'
 import { Card, CardFlex, Button, Speech } from '../../styles'
 import debounce from '../../utils/debounce'
+import nlp  from 'compromise'
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
@@ -49,6 +50,9 @@ class Home extends Component {
       .join('');
       console.log('confidence:',e.results[0][0].confidence)
       if(e.results[0].isFinal){
+        let doc = nlp(tran)
+        doc.verbs().slice(0, 50).out('frequency')
+        console.log(doc.verbs().slice(0, 50).out('frequency'));
         this.setState({
           transArray: this.state.transArray.concat([tran]),
           confidence: this.state.confidence.concat([e.results[0][0].confidence])
