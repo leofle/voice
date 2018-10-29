@@ -1,9 +1,10 @@
 import React from 'react'
 import stampToHuman from '../../utils/dateUtils'
 import { Button } from '../../styles'
-const ListItem = ({items, delRecord}) => {
+const ListItem = ({items, delRecord, refetch}) => {
 	const handleClick = ()=> {
 		delRecord(items.id);
+		refetch();
 	}
 	return (
 		<li>

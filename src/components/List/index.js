@@ -5,18 +5,9 @@ import { Card, Title, ListClean } from '../../styles'
 import {GET_RECORDS_QUERY, ADD_RECORD_MUTATION, DEL_RECORD_MUTATION} from '../../queries'
 
 class List extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      recordingList:[]
-    }
-  }
-  componentDidMount(){
-    if(!this.props.GET_RECORDS_QUERY.loading){
-      this.setState({
-        recordingList: this.props.GET_RECORDS_QUERY.records
-      })
-    }
+
+  componentDidUpdate(){
+    this.props.GET_RECORDS_QUERY.refetch()
   }
   delRecord =(id)=>{
     this.props.DEL_RECORD_MUTATION({
@@ -24,7 +15,6 @@ class List extends Component {
         id:id
       }
     })
-    this.setState({});
   }
 
   render() {
@@ -42,10 +32,10 @@ class List extends Component {
               <span>Actions</span>
             </li>
             <Query query={GET_RECORDS_QUERY}>
-              {({loading, data})=>{
+              {({loading, data, refetch})=>{
                 if(loading) return 'loading...'
                 const { records } = data;
-                  return records.map((record, index)=> <ListItem key={index} items={record} delRecord={this.delRecord}/>)
+                  return records.map((record, index)=> <ListItem key={index} items={record} delRecord={this.delRecord} refetch={refetch}/>)
               }}
             </Query>
           </ListClean>

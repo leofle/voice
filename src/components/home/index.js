@@ -1,7 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import Form from '../Form'
 import Voice from '../Voice'
-import { gql } from 'apollo-boost'
 import { compose, graphql, Query } from 'react-apollo'
 import {
   GET_RECORDS_QUERY,
