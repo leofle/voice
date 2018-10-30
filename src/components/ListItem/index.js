@@ -7,16 +7,18 @@ const ListItem = ({items, delRecord, refetch}) => {
 	}
 	return (
 		<Fragment>
-			<li>
-				<span>{items.name || '--'}</span>
-				<span>{items.startTime}</span>
-				<span>{items.stopTime}</span>
-				<span>{stampToHuman(items.stopTime, items.startTime)}</span>
-				<Button onClick={handleClick}>Del</Button>
-			</li>
-			<li>
-				<p>{items.speech}</p>
-			</li>
+			<span>
+				<li>
+					<span>{items.name || '--'}</span>
+					<span>{items.startTime}</span>
+					<span>{items.stopTime}</span>
+					<span>{stampToHuman(items.stopTime, items.startTime)}</span>
+					<Button onClick={handleClick}>Del</Button>
+				</li>
+				<li>
+					<p>{items.speech}</p>
+				</li>
+			</span>
 		</Fragment>
 	)
 }

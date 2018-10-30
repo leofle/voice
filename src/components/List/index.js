@@ -22,7 +22,7 @@ class List extends Component {
 
     return (
       <Fragment>
-        <Card>
+        <Card bgcolor={'#f2f0f2'}>
           <Title>Records list</Title>
           <ListClean flgrow>
             <li>
