@@ -5,10 +5,12 @@ import App from './components/App'
 import './index.scss'
 import ApolloClient from 'apollo-boost'
 import {ApolloProvider} from 'react-apollo'
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import {defaults, resolvers} from './resolvers'
 
 const client = new ApolloClient({
   uri:'http://localhost:4000/graphql',
+  cache: new InMemoryCache(),
   clientState: {
     defaults,
     resolvers
