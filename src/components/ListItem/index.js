@@ -1,12 +1,12 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import stampToHuman from '../../utils/dateUtils'
 import { Button } from '../../styles'
+
 const ListItem = ({items, delRecord, refetch}) => {
 	const handleClick = ()=> {
 		delRecord(items.id);
 	}
 	return (
-		<Fragment>
 			<span>
 				<li>
 					<span>{items.name || '--'}</span>
@@ -19,7 +19,6 @@ const ListItem = ({items, delRecord, refetch}) => {
 					<p>{items.speech}</p>
 				</li>
 			</span>
-		</Fragment>
 	)
 }
 export default ListItem;

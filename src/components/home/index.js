@@ -52,7 +52,7 @@ class Home extends Component {
       if(e.results[0].isFinal){
         let doc = nlp(tran)
         doc.verbs().slice(0, 50).out('frequency')
-        console.log(doc.terms().out('freq'));
+        console.log(this.state.transArray);
         this.setState({
           transArray: this.state.transArray.concat([tran]),
           confidence: this.state.confidence.concat([e.results[0][0].confidence])
