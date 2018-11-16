@@ -1,6 +1,5 @@
 import React from 'react'
 import './style.scss'
-let sisense = 'sisense_logo.svg';
 
 function WelcomeWidget(){
 	let today = new Date();
@@ -20,7 +19,6 @@ function WelcomeWidget(){
 
 	return (
 		<div className={'welcome-container'}>
-			<img src={sisense}/>
 			<h1>Journey</h1>
 			<p>{today}</p>
 		</div>
