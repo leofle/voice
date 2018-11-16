@@ -11,12 +11,19 @@ import {
 import { Card, CardFlex, Button, Speech } from '../../styles'
 import debounce from '../../utils/debounce'
 import nlp  from 'compromise'
+import Sentiment from 'sentiment';
+import nlpSisensePlugin from '../../utils/nlpSisensePlugin'
+
+const sentencesSentiment = new Sentiment();
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
 recognition.interimResults = true;
 recognition.lang = 'en-US';
+
+
+nlp.plugin(nlpSisensePlugin);
 
 class Home extends Component {
   constructor(props){
@@ -31,9 +38,9 @@ class Home extends Component {
     }
   }
   componentDidMount() {
-    this.scrollToBottom();
+		this.scrollToBottom();
   }
-  
+
   componentDidUpdate() {
     this.scrollToBottom();
   }
@@ -48,11 +55,14 @@ class Home extends Component {
       .map(result=> result[0])
       .map(result=> result.transcript)
       .join('');
-      console.log('confidence:',e.results[0][0].confidence)
       if(e.results[0].isFinal){
-        let doc = nlp(tran)
+				let doc = nlp(tran)
+				const features = doc.match('#Feature+').data().map(topic => topic.normal);
+				const score = sentencesSentiment.analyze(tran).score;
+
+				console.log(`Customer talked about ${features}, satisfaction score: ${score}`);
+
         doc.verbs().slice(0, 50).out('frequency')
-        console.log(this.state.transArray);
         this.setState({
           transArray: this.state.transArray.concat([tran]),
           confidence: this.state.confidence.concat([e.results[0][0].confidence])
@@ -114,7 +124,7 @@ class Home extends Component {
       </Query>
       <CardFlex>
         <Button onClick={this.onRecordingStart}>
-        <svg viewBox="0 0 24 24" 
+        <svg viewBox="0 0 24 24"
           width="25"
           fill="#fff">
           <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"></path>
@@ -124,7 +134,7 @@ class Home extends Component {
         {({loading, data})=>{
             if(loading) return 'loading...'
             const { recordStatus: {isRecording} } = data;
-            return (<Button bcolor="#be47ff" onClick={()=> this.onRecordingStops(isRecording)} 
+            return (<Button bcolor="#be47ff" onClick={()=> this.onRecordingStops(isRecording)}
                       disabled={!isRecording}>
                       stop record
                     </Button>)
@@ -155,8 +165,8 @@ class Home extends Component {
       </Card>
     </Fragment>
     )
-  } 
-  
+  }
+
 }
 
 export default compose(

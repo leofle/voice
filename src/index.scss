@@ -35,6 +35,8 @@ nav {
 	position: fixed;
 	width: 100%;
 	top: 0;
+	display: none;
+	z-index: 999;
 	ul {
 		margin: 0;
 		padding: 0;
@@ -61,4 +63,13 @@ nav {
 }
 main {
 	padding-top: 40px;
+	span.react-resizable-handle {
+		background: none !important;
+		&:after {
+			border: none !important;
+		}
+	}
+}
+.emoji {
+	font-size: 20px;
 }

@@ -49,10 +49,23 @@ const CHANGE_RECORD_STATUS_MUTATION = gql`
   }
 `;
 
+const GET_RESOURCES_QUERY = gql`
+  query($department: String!, $keyword: String!) {
+    resources(department: $department, keyword: $keyword) {
+      keyword
+      links {
+        link
+        name
+      }
+    }
+  }
+`;
+
 export {
   GET_RECORDS_QUERY,
   ADD_RECORD_MUTATION, 
   DEL_RECORD_MUTATION,
   GET_RECORD_STATUS,
-  CHANGE_RECORD_STATUS_MUTATION
+  CHANGE_RECORD_STATUS_MUTATION,
+  GET_RESOURCES_QUERY
 };

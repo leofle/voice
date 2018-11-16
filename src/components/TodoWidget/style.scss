@@ -1,0 +1,38 @@
+.todo {
+	margin: 20px;
+}
+
+.tasks {
+	padding: 5px 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.task-status {
+	display: flex;
+	align-items: center;
+}
+
+.circle {
+	border-radius: 50%;
+	width: 18px;
+	height: 18px;
+	margin-left: 5px;
+	box-shadow: 2px 1px 8px #ccc;
+}
+
+.pending {
+	background-color: #fbb755;
+}
+
+.open {
+	background-color: #00cee6;
+}
+
+.done {
+	background-color: #6EDA55;
+}
+
+.new {
+	background-color: #fbfb50;
+}

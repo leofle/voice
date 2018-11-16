@@ -1,0 +1,15 @@
+.call-container {
+		display: flex;
+    justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	img {
+		width: 200px;
+		border-radius: 100px;
+		margin: 5px;
+    box-shadow: 2px 1px 8px #ccc;
+	}
+	h3 {
+		font-size: 20px;
+	}
+}

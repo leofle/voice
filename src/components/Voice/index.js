@@ -7,7 +7,7 @@ import {GET_RECORDS_QUERY, ADD_RECORD_MUTATION} from '../../queries'
 class Voice extends React.Component {
 
 	state = {
-    blob: '',
+    blob: {},
     speech: ''
 	}
 
