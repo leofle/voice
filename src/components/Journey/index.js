@@ -53,7 +53,7 @@ class Journey extends Component {
       {i: 'satisfaction', x: 0, y: 3, w: 6, h: 2},
       {i: 'scripts', x: 6, y: 4, w: 3, h: 4},
       {i: 'hold', x: 10, y: 0, w: 3, h: 2},
-      {i: 'resources', x: 10, y: 1, w: 3, h: 4, static: true},
+      {i: 'resources', x: 10, y: 1, w: 3, h: 4},
     ];
 
     this.state =  {
