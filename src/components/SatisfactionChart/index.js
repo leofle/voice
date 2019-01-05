@@ -107,7 +107,10 @@ class SatisfactionChart extends Component {
         };
 
         return (
-			<ReactHighcharts config={config} ref={(satChart) => this.satChart = satChart}></ReactHighcharts>
+            <ReactHighcharts 
+                config={config} 
+                ref={(satChart) => this.satChart = satChart}>
+            </ReactHighcharts>
 	    )
     }
 }
